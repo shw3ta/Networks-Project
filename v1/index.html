@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" type="text/css" href="styles.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script>
+    $(document).ready(function(){
+      $(".login-form").hide();
+      $(".login").css("background", "none");
+
+      $(".login").click(function()
+      {
+        $(".signup-form").hide();
+        $(".login-form").show();
+        $(".signup").css("background", "none");
+        $(".login").css("background", "#fff");
+      });
+
+      $(".signup").click(function()
+      {
+        $(".signup-form").show();
+        $(".login-form").hide();
+        $(".login").css("background", "none");
+        $(".signup").css("background", "#fff");
+      });
+
+      $(".btn").click(function()
+      { 
+        $(".input").val("");
+      });
+
+    });
+
+   </script>
+</head>
+
+<body>
+   <div class="container">
+      
+      <div class="signup">Sign Up</div>
+      <div class="login">Log In</div>
+      
+       <div class="signup-form">
+          <input type="text" placeholder="Your Email Address" class="input"><br />
+          <input type="text" placeholder="Choose a Username" class="input"><br />
+          <input type="password" placeholder="Choose a Password" class="input"><br />
+          <div class="btn">Create account</div>
+       </div>
+      
+      <div class="login-form">
+          <input type="text" placeholder="Email or Username" class="input"><br />
+          <input type="password" placeholder="Password" class="input"><br />
+          <div class="btn">log in</div>          
+       </div>
+      
+    </div>
+
+</body>
+</html> 
