@@ -6,6 +6,51 @@
    <link rel="stylesheet" type="text/css" href="styles.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script>
+     function transformPassword (pass) {
+       // TODO @jahnavi
+       return pass
+     }
+     /** Register a new user */
+     function register () {
+       // input values
+       const email = document.getElementById('signup-email').value
+       const username = document.getElementById('signup-username').value
+       const password = document.getElementById('signup-password').value
+       // transform password
+       const hash = transformPassword(password)
+       // request data from server
+       fetch(`/register`, {
+          method: 'POST',
+          body: JSON.stringify({ email, username, hash }),
+          headers: { 'content-type': 'application/json' }
+       })
+       .then(res => res.json())
+       .then(json => {
+         if (json.error) {
+           throw new Error(json.error)
+         }
+         window.alert('Registration successful! You can login now')
+       })
+       .catch(error => window.alert(`Registration Failed!\n${error.message}`))
+     }
+     /** Login */
+     function login () {
+       // fetch all the input values
+       const username = document.getElementById('username').value
+       const password = document.getElementById('password').value
+       // transform password
+       const hash = transformPassword(password)
+       // send request to server
+       fetch(`/login?username=${encodeURIComponent(username)}&hash=${encodeURIComponent(hash)}`, { method: 'POST' })
+       .then(res => res.json())
+       .then(json => {
+         if (json.error) {
+           throw new Error(json.error)
+         }
+         window.alert('Login successful!')
+       })
+       .catch(error => window.alert(`Login Failed!\n${error.message}`))
+     }
     $(document).ready(function(){
       $(".login-form").hide();
       $(".login").css("background", "none");
@@ -43,16 +88,16 @@
       <div class="login">Log In</div>
       
        <div class="signup-form">
-          <input type="text" placeholder="Your Email Address" class="input"><br />
-          <input type="text" placeholder="Choose a Username" class="input"><br />
-          <input type="password" placeholder="Choose a Password" class="input"><br />
-          <div class="btn">Create account</div>
+          <input id="signup-email" type="text" placeholder="Your Email Address" class="input"><br />
+          <input id="signup-username" type="text" placeholder="Choose a Username" class="input"><br />
+          <input id="signup-password" type="password" placeholder="Choose a Password" class="input"><br />
+          <div class="btn" onclick="register()">Create account</div>
        </div>
       
       <div class="login-form">
-          <input type="text" placeholder="Email or Username" class="input"><br />
-          <input type="password" placeholder="Password" class="input"><br />
-          <div class="btn">log in</div>          
+          <input id="username" type="text" placeholder="Email or Username" class="input"><br />
+          <input id="password" type="password" placeholder="Password" class="input"><br />
+          <div class="btn" onclick="login()">log in</div>          
        </div>
       
     </div>
