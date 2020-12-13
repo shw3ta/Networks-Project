@@ -41,7 +41,7 @@ export function route<T>({ app, method, type, path, respond }: RouteParameters<T
             if (response?.redirect) res.redirect (response.redirect)
             else res.status (200).send (response)
 
-            console.log({ path: descriptor, success: true, ip: req.ip, responseTime: timeTakenS() })
+            console.log({ path: descriptor, success: true, ip: req.ip, response, responseTime: timeTakenS() })
         } catch (error) {
             let code = error.code || error.status || 500
             if (typeof code !== 'number') code = 500

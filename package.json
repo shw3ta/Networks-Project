@@ -10,7 +10,9 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
+    "@types/md5": "^2.2.1",
     "express": "^4.17.1",
+    "md5": "^2.3.0",
     "runtypes": "^5.0.1"
   }
 }

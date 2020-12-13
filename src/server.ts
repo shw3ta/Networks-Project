@@ -27,8 +27,8 @@ const server = (port?: number) => {
         path: '/login',
         type: LoginForm,
         respond: async body => {
-            const result = await loginUser(body)
-            if (typeof result === 'undefined') return { success: true }
+            await loginUser(body)
+            return { success: true }
         }
     })
     

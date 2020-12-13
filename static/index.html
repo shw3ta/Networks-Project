@@ -5,9 +5,10 @@
    <title></title>
    <link rel="stylesheet" type="text/css" href="styles.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="/sha256.js"></script>
    <script>
      function transformPassword (pass) {
-       // TODO @jahnavi
+       pass = sha256(pass)
        return pass
      }
      /** Register a new user */
@@ -31,7 +32,10 @@
          }
          window.alert('Registration successful! You can login now')
        })
-       .catch(error => window.alert(`Registration Failed!\n${error.message}`))
+       .catch(error => {
+         console.error(error)
+         window.alert(`Registration Failed!\n${error.message}`)
+       })
      }
      /** Login */
      function login () {
